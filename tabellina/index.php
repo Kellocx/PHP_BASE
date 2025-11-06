@@ -8,21 +8,29 @@
 </head>
 
 <body>
+    <form action="" method="get">
 
+        Inserisci numero : <input type="number" >
+
+        <input type="submit" value="numeroInserito">
+
+
+
+    </form>
     <?php
     // Chiedo all'utente di inserire un numero
-    $numeroInserito = (int)("Inserisci un numero: , $n");
+    $numeroInserito = (int)("Inserisci un numero: , ");
 
     // Stampo la tabellina del numero inserito
-    echo "Tabellina del numero $numeroInserito:, $n";
+    echo "Tabellina del numero $numeroInserito: ";
     for ($i = 1; $i <= 10; $i++) {
         $risultato = $numeroInserito * $i;
         echo "$numeroInserito x $i = $risultato\n";
     }
     ?>
-   
 
-    
+
+
 </body>
 
 </html>
