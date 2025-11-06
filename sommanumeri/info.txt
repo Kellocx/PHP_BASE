@@ -1,0 +1,11 @@
+Codice php che mostra a schermo la somma dei numeri di un array
+
+        - array di numeri
+
+        - somma a 0
+
+        - ciclo for per array 
+
+        - sommare i numeri aggiungendo a somma per ogni ciclo
+
+        - echo
