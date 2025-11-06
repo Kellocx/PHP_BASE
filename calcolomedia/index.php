@@ -1,35 +1,31 @@
-<!DOCTYPE html>
-    <html lang="it">
+<?php
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calcolo la Media</title>
-    </head>
+if (isset($_POST['n1'], $_POST['n2'], $_POST['n3'])) {
 
-    <body>
-        <h1>Inserisci 5 numeri</h1>
-        <!-- Form -->
-        <form method="post">
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-                Inserisci 5 Numeri 
-                <input type="number" name="numeri[]" required>
-                <br>
-            <?php endfor; ?><!-- -->
-            <input type="submit" value="Calcola Media">
-        </form>
+    $n1 = (float) $_POST['n1'];
+    $n2 = (float) $_POST['n2'];
+    $n3 = (float) $_POST['n3'];
 
-        <?php
-      
-            $numeri = $_POST['numeri'];
-            $somma = array_sum($numeri);
-            $media += $somma / count($numeri);
-            echo "<h2>La media dei numeri inseriti è: " . number_format($media, 2) . "</h2>";
-        
-        ?>
+    //calcolo della media
+    $media = ($n1 + $n2 + $n3) / 3;
+
+    echo "La media dei numeri è " . number_format($media, 2);
+}
+?>
 
 
 
-</body>
 
-</html>
+<form action="" method="post">
+
+
+    Primo Numero : <input type="decimal" name="n1">
+
+    Secondo Numero : <input type="decimal" name="n2">
+
+    Terzo Numero : <input type="decimal" name="n3">
+
+    <input type="submit" value="calcola media">
+
+
+</form>
