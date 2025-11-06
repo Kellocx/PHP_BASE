@@ -1,0 +1,7 @@
+Ho bisogno un form che prenda in input un user e una password, devono essere obbligatori coe campi
+-Che simuli un login verso il server
+-lato backend si dovrà verificare che l user e la password coincidano,
+- e restitituire un messaggio di accesso riuscito, se coincidono
+altrimenti un messaggio di Credenziali errate
+
+
