@@ -11,10 +11,10 @@
 
     <?php
     // Chiedo all'utente di inserire un numero
-    $numeroInserito = (int)("Inserisci un numero: ");
+    $numeroInserito = (int)("Inserisci un numero: , $n");
 
     // Stampo la tabellina del numero inserito
-    echo "Tabellina del numero $numeroInserito:\n";
+    echo "Tabellina del numero $numeroInserito:, $n";
     for ($i = 1; $i <= 10; $i++) {
         $risultato = $numeroInserito * $i;
         echo "$numeroInserito x $i = $risultato\n";
