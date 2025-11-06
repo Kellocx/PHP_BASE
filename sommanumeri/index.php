@@ -17,8 +17,8 @@
 
     //ciclo array di numeri
 
-    for($i = 0; $i < 10; $i++){
-        $somma += $numeri[$i];
+    foreach($numeri as $num){
+        $somma += $num;
     }
 
     echo "La somma dei numeri è:  $somma";

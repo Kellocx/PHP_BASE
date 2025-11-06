@@ -1,0 +1,8 @@
+Chiedo un numero all utente e voglio vedere a schermo la tabellina sino al valore 10 
+di questo numero
+
+
+numeroInserito  x 1 
+                x 2 
+                x 3 
+                x 4..... = risultato
