@@ -21,15 +21,15 @@
     <?php
     if(isset ($_POST["numero"])){
         $num = $_POST['numero'];
-    }
-    // Chiedo all'utente di inserire un numero
-    $numeroInserito = (int)("Inserisci un numero: , ");
+   
+    
 
     // Stampo la tabellina del numero inserito
     echo "Tabellina del numero $numeroInserito: ";
     for ($i = 0; $i <= 10; $i++) {
       
         echo "$num x $i = ". ($num * $i) . "br";
+        }
     }
     ?>
 
