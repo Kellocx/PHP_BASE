@@ -10,22 +10,26 @@
 <body>
     <form action="" method="get">
 
-        Inserisci numero : <input type="number" >
+        Inserisci numero : <input type="number" name="numero">
 
-        <input type="submit" value="numeroInserito">
+        <input type="submit">
+        <input type="submit" value="MOSTRA TABELLINA">
 
 
 
     </form>
     <?php
+    if(isset ($_POST["numero"])){
+        $num = $_POST['numero'];
+    }
     // Chiedo all'utente di inserire un numero
     $numeroInserito = (int)("Inserisci un numero: , ");
 
     // Stampo la tabellina del numero inserito
     echo "Tabellina del numero $numeroInserito: ";
-    for ($i = 1; $i <= 10; $i++) {
-        $risultato = $numeroInserito * $i;
-        echo "$numeroInserito x $i = $risultato\n";
+    for ($i = 0; $i <= 10; $i++) {
+      
+        echo "$num x $i = ". ($num * $i) . "br";
     }
     ?>
 
