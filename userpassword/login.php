@@ -1,6 +1,3 @@
-
-
-
 <?php
 
 if(isset($_POST['username'], $_POST['password'])){
@@ -15,7 +12,7 @@ $valid_password = "pw123";
 
     // Controlla se le credenziali sono corrette
     if ($username === $valid_username && $password === $valid_password) {
-        echo "Ti dei loggato " . htmlspecialchars($username) . ".";
+        echo "Ti sei loggato  correttamente", ($username) ;
     } else {
         echo "Credenziali errate. Riprova.";
     }

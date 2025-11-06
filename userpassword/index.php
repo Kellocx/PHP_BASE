@@ -19,9 +19,9 @@
           
             <input type="password" id="password" name="password" required placeholder="Inserisci password"><br><br>
 
-            <input type="submit" value="Accedi">
+            <input type="submit" value="Login">
         </form>
-        <?php 'login.php'; ?>
+        <?php include 'login.php'; ?>
     </main>
 
 </body>
