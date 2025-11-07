@@ -45,7 +45,7 @@
 <?php
 
     //Modo per definire costanti
-
+    //.    nome costante, valore, 
     define("tassa_stato", 26);
     define("inps", 15);
     define("commercialista", 800);
