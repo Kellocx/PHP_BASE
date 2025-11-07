@@ -163,14 +163,14 @@
 
 <?php
 
+//dichiarazione funzione
+    function saluta($x){
 
-    function saluta($nome){
 
-
-        return "Ciao, $nome";
+        return "Ciao, $x";
 
     }
-
+//richiamo la funzione: quindi utilizzo della funzione
     echo saluta("diego");
     echo saluta("marco");
 
