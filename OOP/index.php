@@ -78,3 +78,4 @@ function faiParlare(Animale $animale)
 
 faiParlare(animale: $gatto); //gatto
 faiParlare(animale: $cane); //cane
+?>
