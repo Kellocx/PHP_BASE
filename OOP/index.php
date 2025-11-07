@@ -59,7 +59,7 @@ class Gatto extends Animale
 }
 
 
-//-----------------------------------------------------------------MODELLAZIONE UTILIZZO QUINDI CON OGGETTI-------------------------------------------------------------
+//--------------------------------------------------------   MODELLAZIONE UTILIZZO QUINDI CON OGGETTI-------------------------------------------------------------
 
 
 $cane = new Cane(nome: "Fido", specie: "Carlino", peso: 20, habitat: "Giardino");
