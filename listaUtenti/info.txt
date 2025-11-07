@@ -1,0 +1,6 @@
+Sviluppare un'applicazione che chiede in input nome e numero di telefono UTENTE.
+Creare una lista(array) che deve essere salvata in sessione,
+per salvare  il dato  anche dopo il refresh della pagina.
+Infine creare un campo di ricerca nome utente da visualizzare.
+
+timeou=24H;
