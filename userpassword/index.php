@@ -16,7 +16,6 @@
             Inserisci utente
             <input type="text" id="username" name="username" required placeholder="Inserisci username"><br><br>
             Inserisci password
-          
             <input type="password" id="password" name="password" required placeholder="Inserisci password"><br><br>
 
             <input type="submit" value="Login">

@@ -6,3 +6,7 @@ numeroInserito  x 1
                 x 2 
                 x 3 
                 x 4..... = risultato
+
+                
+                
+La pagin acreata lato client viene trasmessa dal serve

@@ -1,5 +1,5 @@
 <?php
-
+//se c'è
     if(isset($_GET['parola'])){
 
         //prendo il dato inserito e tramite il metodo STRTOLOWER CONVERTO IN MINUSCOLO

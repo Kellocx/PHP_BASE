@@ -1,6 +1,6 @@
 <?php
-
-if (isset($_POST['n1'], $_POST['n2'], $_POST['n3'])) {
+//isset: controllo se il valore inserito è diverso da !null quindi deve essere presente
+if (isset($_POST['n1'], $_POST['n2'], $_POST['n3'])) { // se esistono
 
     $n1 = (float) $_POST['n1'];
     $n2 = (float) $_POST['n2'];
@@ -10,7 +10,7 @@ if (isset($_POST['n1'], $_POST['n2'], $_POST['n3'])) {
     $media = ($n1 + $n2 + $n3) / 3;
 
     echo "La media dei numeri è " . number_format($media, 2);
-}
+}//concatenazione nell'echo con il punto e lo spazio prima e dopo
 ?>
 
 
@@ -26,6 +26,6 @@ if (isset($_POST['n1'], $_POST['n2'], $_POST['n3'])) {
     Terzo Numero : <input type="decimal" name="n3">
 
     <input type="submit" value="calcola media">
-
+  <!--bottone invia -->
 
 </form>

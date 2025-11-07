@@ -15,7 +15,7 @@
     //definisco contenitore somma
     $somma = 0;
 
-    //ciclo array di numeri
+    //ciclo array di numeri e per ogni iterazione di $i aggiungo il valore a somma
 
     foreach($numeri as $num){
         $somma += $num;
