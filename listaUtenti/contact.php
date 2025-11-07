@@ -1,20 +1,25 @@
 <?php
 
-    class Contact {
-        public string $name;
-        public string $phone;
+class Contact
+{
 
+    //Attributi
+    public string $name;
+    public string $phone;
 
-        //costruttore
-        public function __construct(string $name, string $phone){
-        
+    //Costruttore
+    public function __construct(string $name, string $phone)
+    {
+
         $this->name = $name;
         $this->phone = $phone;
-        }
-
-        //metodo o funzione
-        public function getInfo(): string {
-            return "Nome : $this->name - Telefono $this->phone";
-        }
     }
+
+    //Metodo o Funzione
+    public function getInfo(): string
+    {
+
+        return "Nome : $this->name - Telefono $this->phone";
+    }
+}
 ?>

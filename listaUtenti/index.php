@@ -1,40 +1,65 @@
 <?php
-//importo il file funzction per utilizzare le funzioni
-require_once 'function.php';
+
+//importo il file functions perchè devo utilizzare le funzioni in questo file
+require_once 'functions.php';
 
 
-//------------------ SALAVATAGGIO SESSION STORAGE ------------
-//Inizializzo la rubrica. con la sessione
+//-----------------------------LOGICA SALVATAGGIO SESSIONSTORAGE---------------------------
 
+//Inizializzo la rubrica con la sessione
 session_start();
 
 if (!isset($_SESSION['rubrica'])) {
-    $_SESSION['rubrica'] = []; //prima volta : rubrica nella sessione del browser
+
+    $_SESSION['rubrica'] = []; // prima volta : rubrica nella sessione del browser
+
 }
 
-//Devo far riferimento all'array della seessione con &
-
+//Devo fare un riferimento all array della sessione con &
 $rubrica = &$_SESSION['rubrica'];
 
-//--------------------------------------------------
 
-//Gestione invio form. per aggiungere conattto
+//-------------------------------------------------------------------------------------------
 
+
+//gestione invio form per aggiungere contatto
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
-    $name = ($_POST['name']); //prendo nome e lo salvo in variabile
-    $phone = ($_POST['phone']); // prendo numero
+
+    $name = trim($_POST['name']); // prendo il nome dall input e lo salvo uin una variabile
+    $phone = trim($_POST['phone']); // preso il numero
+
 
     if ($name && $phone) {
-        addContact($rubrica, $name, $phone); //aggiungo contatto alal rubrica
 
-        $message = "CONTATTO AGGIUNTO";
+        addContact($rubrica, $name, $phone); // aggiungo il contatto alla rubrica
+
+        $message = "Contatto aggiunto!";
     } else {
-        $message = "Inserisci un nome e un numero di telefono in rubrica";
+
+        $message = "Inserisci un nome o un numero di telefono...";
     }
 }
 
 
+//gestione di ricerca contatto
+
+$searchResult = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
+
+
+    $searchName = trim($_POST['search_name']); // prendo il nome da cercare
+    $searchResult = searchContact($rubrica, $searchName);
+}
+
+
+
 ?>
+
+
+
+
+
 
 
 
@@ -49,46 +74,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
 </head>
 
 <body>
-    <h1>Rubrica Contatti</h1><br>
 
+
+    <h1>Rubrica Contatti</h1>
+
+
+
+    <!--Inserimento Contatto-->
     <h2>Aggiungi Contatto</h2>
+    <form action="" method="POST">
 
-    <form action="" method="post">
-        Nome: <input type="text" name="name">
-        Telefono: <input type="text" name="phone">
+        Nome : <input type="text" name="name">
+        Telefono : <input type="text" name="phone">
 
-        <button type="submit" name="add">Aggiungi contatto</button>
-
-
+        <button type="submit" name="add">Aggiungi</button>
 
     </form>
 
+
+    <!--Ricerca del contatto-->
     <h2>Ricerca Contatto</h2>
+    <form action="" method="POST">
 
-    <form action="" method="post">
-        Nome: <input type="text" name="serach_name">
-
+        Nome : <input type="text" name="search_name">
 
         <button type="submit" name="search">Cerca</button>
 
-
-
     </form>
+
+
+    <?php
+
+    //campo ricerca
+    if ($searchResult !== null) {
+
+        echo "Risultato : " . $searchResult->getInfo();
+    } elseif (isset($_POST['search'])) {
+
+        echo "Contatto non trovato";
+    }
+
+    ?>
+
+
+
+
+
+    <!--Per stampare tutti i contatti devo andare a prender la rubrica salvata nella sessione attraverso la funzione printContacts()-->
     <h2>Elenco Contatti</h2>
 
     <?php
 
     printContacts($rubrica);
+
     ?>
 
+
+
+
+
+    <!--Sezione di debug in formato testo originale-->
     <h2>Debug sessione</h2>
 
-    <pre> 
-        <?php
-        print_r($_SESSION);
+    <pre> <?php print_r($_SESSION)  ?> </pre>
 
-        ?>
-    </pre>
 
 
 </body>
