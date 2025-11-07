@@ -30,4 +30,3 @@ if (isset($_POST['n1'], $_POST['n2'], $_POST['n3'])) { // se esistono
 
 </form>
 
-?>
