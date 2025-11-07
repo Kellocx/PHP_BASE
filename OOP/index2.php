@@ -110,3 +110,4 @@ foreach ($forme as $forma) {
 
     mostraArea($forma);
 }
+?>
