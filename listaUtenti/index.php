@@ -1,3 +1,29 @@
+<?php
+//importo il file funzction per utilizzare le funzioni
+require_once 'function.php';
+
+
+//------------------ SALAVATAGGIO SESSION STORAGE ------------
+//Inizializzo la rubrica. con la sessione
+
+session_start();
+
+if (!isset($_SESSION['rubrica'])){
+    $_SESSION['rubrica'] = []; //prima volta : rubrica nella sessione del browser
+}
+
+//Devo far riferimento all'array della seessione con &
+
+$rubrica = &$_SESSION['rubrica'];
+
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,14 +52,16 @@
 
     <form action="" method="post">
         Nome: <input type="text" name="serach_name">
-        
+
 
         <button type="submit" name="search">Cerca</button>
 
 
 
     </form>
+    <h2>Elenco Contatti</h2>
 
+    <h2>Debug sessione</h2>
 
 
 </body>
