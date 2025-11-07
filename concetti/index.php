@@ -10,7 +10,7 @@
     //float -> numero decimale
     //bool -> booleano (vero o falso)
 
-    /* Dichiarazione di una variabile :  con $  */
+    /* Dichiarazione di una variabile (in questo caso array) :  con $  */
     $nome = ['pippo','paperino'];
 
     //stampa a schermo qualcosa : echo mostra il valore
