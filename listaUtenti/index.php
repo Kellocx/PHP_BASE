@@ -8,7 +8,7 @@ require_once 'function.php';
 
 session_start();
 
-if (!isset($_SESSION['rubrica'])){
+if (!isset($_SESSION['rubrica'])) {
     $_SESSION['rubrica'] = []; //prima volta : rubrica nella sessione del browser
 }
 
@@ -16,7 +16,22 @@ if (!isset($_SESSION['rubrica'])){
 
 $rubrica = &$_SESSION['rubrica'];
 
+//--------------------------------------------------
 
+//Gestione invio form. per aggiungere conattto
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
+    $name = ($_POST['name']); //prendo nome e lo salvo in variabile
+    $phone = ($_POST['phone']); // prendo numero
+
+    if ($name && $phone) {
+        addContact($rubrica, $name, $phone); //aggiungo contatto alal rubrica
+
+        $message = "CONTATTO AGGIUNTO";
+    } else {
+        $message = "Inserisci un nome e un numero di telefono in rubrica";
+    }
+}
 
 
 ?>
@@ -61,7 +76,19 @@ $rubrica = &$_SESSION['rubrica'];
     </form>
     <h2>Elenco Contatti</h2>
 
+    <?php
+
+    printContacts($rubrica);
+    ?>
+
     <h2>Debug sessione</h2>
+
+    <pre> 
+        <?php
+        print_r($_SESSION);
+
+        ?>
+    </pre>
 
 
 </body>
