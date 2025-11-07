@@ -7,3 +7,15 @@ Necessita di COSTRUTTORE della CLASSE.
 
 OGGETTO: richiamo la classe per costruire il nuovo oggetto.
 
+
+
+
+--------------------------------------- SPECIFICAZIONE INDEX PHP ------------------------------
+esercizio: 1
+
+Abbiamo una classe genitore chiamata "Forma" con 2 funzioni : Area() e descrizione();
+
+Estendi altre 2 classi dalla classe genitore che è forma 
+- cerchio 
+- rettangolo
+
