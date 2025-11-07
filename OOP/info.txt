@@ -1,0 +1,9 @@
+CLASSE
+è una modellazione di un concetto del mondo relae.
+Grazie alla classe costruisco 
+OGGETTI CHIMATI ANCHE ISTANZE
+
+Necessita di COSTRUTTORE della CLASSE.
+
+OGGETTO: richiamo la classe per costruire il nuovo oggetto.
+

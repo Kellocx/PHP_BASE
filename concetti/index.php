@@ -177,3 +177,22 @@
 
 
 ?>
+
+<!--Classse Oggetti -->
+
+<?php
+// Modelleazione della classe auto
+class Auto {
+    $cilindrata : decimal;
+    $altezza : decimal;
+    $larghezza : decimal;
+    $colore: string;
+    $prezzo : decimal;
+
+}
+
+//creo oggetto o modello o istanza o entità
+new Auto = lamborgini(cilindrata : 2000, altezza : 45, larghezzza : 150, colore : oro, prezzo : 200);
+
+
+?>
