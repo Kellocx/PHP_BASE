@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
 
 
     $searchName = trim($_POST['search_name']); // prendo il nome da cercare
+    
     $searchResult = searchContact($rubrica, $searchName);
 }
 
@@ -101,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
         <button type="submit" name="search">Cerca</button>
 
     </form>
+    <br>
 
 
     <?php
