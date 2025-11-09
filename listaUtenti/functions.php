@@ -13,7 +13,7 @@ function addContact(array &$rubrica, string $name, string $phone): void
 
 
 //funzione che stampa tutti i contatti quindigli oggetti della rubrica salvata nella sessione
-function printContacts(array &$rubrica): void
+function printContact(array &$rubrica): void
 {
 
     foreach ($rubrica as $contatto) {
