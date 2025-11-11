@@ -12,6 +12,10 @@ Creare un applicazione formata da
     -inizializzate con git
 
     -salvataggio  sessione in coockies 
+    messaggi in modal di bootstrap
 
+    con la possipibilita di aggiornare i libri aggiunti. mella. lista che vanno visualizzati nel file index.php
+- sessione di debug che visualizzi i dati salvataggiorendere dei risultati di ricerca e rendere della lista dei libri presenti e
+render libro cercato
 
 Book : titolo, autore , anno, prezzo, numero pagine

@@ -3,13 +3,14 @@ session_start();
 require 'Book.php';
 require 'functions.php';
 
+
 $message = '';
 $editIndex = null;
 $editBook = null;
 $searchResults = [];
-$showModal = false;
+$showSearchModal = false;
+$showMessageModal = false;
 
-// Inizializza array libri
 if (!isset($_SESSION['books'])) {
     $_SESSION['books'] = [];
 }
@@ -18,13 +19,15 @@ if (!isset($_SESSION['books'])) {
 if (isset($_GET['delete'])) {
     deleteBook((int)$_GET['delete']);
     $message = "Libro eliminato.";
+    $showMessageModal = true;
 }
 
 // Prepara modifica
 if (isset($_GET['edit'])) {
     $editIndex = (int) $_GET['edit'];
-    if (isset($_SESSION['books'][$editIndex])) {
-        $editBook = $_SESSION['books'][$editIndex];
+    $books = getBooks();
+    if (isset($books[$editIndex])) {
+        $editBook = $books[$editIndex];
     }
 }
 
@@ -38,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
         addBook($book);
         $message = "Libro aggiunto con successo!";
     }
+    $showMessageModal = true;
 }
 
 // Ricerca
@@ -46,7 +50,7 @@ if (
     isset($_GET['filter']) && in_array($_GET['filter'], ['title', 'author', 'price'])
 ) {
     $searchResults = searchBooks($_GET['search'], $_GET['filter']);
-    $showModal = true;
+    $showSearchModal = true;
 }
 ?>
 <!DOCTYPE html>
@@ -56,18 +60,13 @@ if (
     <meta charset="UTF-8">
     <title>Libreria</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <?php if (!empty($message)): ?>
-        
-    <?php endif; ?>
 </head>
 
 <body class="bg-light">
 
     <div class="container mt-5">
         <h2><?php echo $editBook ? 'Modifica Libro' : 'Aggiungi un Libro'; ?></h2>
-        <?php if ($message): ?>
-            <div class="alert alert-info"><?php echo $message; ?></div>
-        <?php endif; ?>
+
         <form method="POST">
             <input type="hidden" name="editIndex" value="<?php echo $editIndex !== null ? $editIndex : ''; ?>">
             <div class="mb-2"><label>Titolo</label><input type="text" name="title" class="form-control" required value="<?php echo $editBook ? $editBook->title : ''; ?>"></div>
@@ -85,7 +84,7 @@ if (
             <div class="row g-2">
                 <div class="col-md-4">
                     <select name="filter" class="form-select" required>
-                        <option value="">Seleziona criterio</option>
+                        <option value="">Cerca per autore, titolo o prezzo</option>
                         <option value="title">Titolo</option>
                         <option value="author">Autore</option>
                         <option value="price">Prezzo</option>
@@ -106,24 +105,16 @@ if (
         </ul>
     </div>
 
-    <!-- Modale Bootstrap -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <!-- Modale Messaggio -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Risultati della ricerca</h5>
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="messageModalLabel">Messaggio</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
                 </div>
                 <div class="modal-body">
-                    <?php if (!empty($searchResults)): ?>
-                        <ul>
-                            <?php foreach ($searchResults as $result): ?>
-                                <li><?php echo htmlspecialchars($result->title . " di " . $result->author . " - Prezzo: " . $result->price . "€"); ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else: ?>
-                        <p>Nessun risultato trovato.</p>
-                    <?php endif; ?>
+                    <?php echo htmlspecialchars($message); ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
@@ -132,22 +123,39 @@ if (
         </div>
     </div>
 
-    <?php require 'footer.php'; ?>
+    <!-- Modale Ricerca -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Risultati della ricerca</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <?php if (!empty($message)): ?>
-        <script>
-            const msgModal = new bootstrap.Modal(document.getElementById('messageModal'));
-            msgModal.show();
-        </script>
-    <?php endif; ?>
-    <script>
-        // Apri il modale se ci sono risultati di ricerca
-        <?php if ($showModal): ?>
-            var searchModal = new bootstrap.Modal(document.getElementById('searchModal'));
-            searchModal.show();
-        <?php endif; ?>
-    </script>
-</body>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+                <?php if ($showMessageModal): ?>
+                    <script>
+                        const msgModal = new bootstrap.Modal(document.getElementById('messageModal'));
+                        msgModal.show();
+                    </script>
+                <?php endif; ?>
+                <?php if ($showSearchModal): ?>
+                    <script>
+                        const searchModal = new bootstrap.Modal(document.getElementById('searchModal'));
+                        searchModal.show();
+                    </script>
 
-</html>
+                    <h4>🛠 Debug: Dati salvati nei cookie</h4>
+                    <div class="card mb-5">
+                        <div class="card-body">
+                            <pre><?php
+                                    if (isset($_COOKIE['books'])) {
+                                        echo htmlspecialchars(json_encode(json_decode($_COOKIE['books'], true), JSON_PRETTY_PRINT));
+                                    } else {
+                                        echo "Nessun dato salvato nei cookie.";
+                                    }
+                    ?></pre>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php include 'footer.php'; ?>

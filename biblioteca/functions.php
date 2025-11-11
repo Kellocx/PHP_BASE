@@ -1,48 +1,61 @@
 <?php
+require_once 'Book.php';
+
 function addBook($book)
 {
-    $_SESSION['books'][] = $book;
+    $_SESSION['books'][] = (array) $book;
+}
+
+function updateBook($index, $book)
+{
+    if (isset($_SESSION['books'][$index])) {
+        $_SESSION['books'][$index] = (array) $book;
+    }
 }
 
 function deleteBook($index)
 {
     if (isset($_SESSION['books'][$index])) {
         unset($_SESSION['books'][$index]);
-        $_SESSION['books'] = array_values($_SESSION['books']); // Reindicizza l'array
+        $_SESSION['books'] = array_values($_SESSION['books']);
     }
 }
 
-function updateBook($index, $book)
+function getBooks()
 {
-    if (isset($_SESSION['books'][$index])) {
-        $_SESSION['books'][$index] = $book;
+    $books = [];
+    foreach ($_SESSION['books'] as $data) {
+        $books[] = Book::fromArray($data);
     }
+    return $books;
 }
 
-function printBooks()
-{
-    foreach ($_SESSION['books'] as $index => $book) {
-        echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-        echo htmlspecialchars($book->title) . " di " . htmlspecialchars($book->author);
-        echo '<div>';
-        echo '<a href="?edit=' . $index . '" class="btn btn-warning btn-sm">Modifica</a>';
-        echo '<a href="?delete=' . $index . '" class="btn btn-danger btn-sm">Elimina</a>';
-        echo '</div>';
-        echo '</li>';
-    }
-}
-
-function searchBooks($searchTerm, $filter)
+function searchBooks($term, $filter)
 {
     $results = [];
-    foreach ($_SESSION['books'] as $book) {
-        if (($filter === 'title' && stripos($book->title, $searchTerm) !== false) ||
-            ($filter === 'author' && stripos($book->author, $searchTerm) !== false) ||
-            ($filter === 'price' && $book->price == $searchTerm)
+    $term = strtolower(trim($term));
+    foreach (getBooks() as $book) {
+        if (
+            ($filter === 'title' && strpos(strtolower($book->title), $term) !== false) ||
+            ($filter === 'author' && strpos(strtolower($book->author), $term) !== false) ||
+            ($filter === 'price' && is_numeric($term) && $book->price == $term)
         ) {
             $results[] = $book;
         }
     }
     return $results;
+}
+
+function printBooks()
+{
+    foreach (getBooks() as $i => $book) {
+        echo "<li class='list-group-item d-flex justify-content-between align-items-center'>";
+        echo htmlspecialchars($book->title) . " di " . htmlspecialchars($book->author);
+        echo " (" . htmlspecialchars($book->year) . ") - " . htmlspecialchars($book->pages) . " pagine - " . htmlspecialchars($book->price) . "€";
+        echo "<span>";
+        echo "<a href='?edit=$i' class='btn btn-sm btn-warning me-2'>Modifica</a>";
+        echo "<a href='?delete=$i' class='btn btn-sm btn-danger'>Elimina</a>";
+        echo "</span></li>";
+    }
 }
 ?>
